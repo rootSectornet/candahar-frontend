@@ -1,0 +1,53 @@
+// 
+// _layouts.scss
+// 
+
+body[data-layout-size="boxed"] {
+    background-color: $body-bg;
+    #app {
+        width: $boxed-layout-width;
+        margin: 10px auto;
+        padding: 0;
+        // box-shadow: $box-shadow;
+        border-radius: 10px;
+        .container-fluid{
+            margin: 0;
+            border-radius: 10px;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            .navbar{
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+        }
+    }
+
+    #page-topbar {
+        max-width: $boxed-layout-width;
+        margin: 0 auto;
+    }
+
+    .footer {
+        margin: 0 auto;
+        max-width: calc(#{$boxed-layout-width} - #{$sidebar-width});
+    }
+
+    &.vertical-collpsed {
+        .footer {
+            max-width: calc(#{$boxed-layout-width} - #{$sidebar-collapsed-width});
+        }
+    }
+}
+
+// Horizontal Boxed Layout
+
+body[data-layout="horizontal"][data-layout-size="boxed"]{
+    #page-topbar, #layout-wrapper, .footer {
+        max-width: 100%;
+    }
+    .container-fluid, .navbar-header {
+        max-width: $boxed-layout-width;
+    }
+}
