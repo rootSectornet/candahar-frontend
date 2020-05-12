@@ -15,9 +15,23 @@ export default {
   components: { Layout,Related,Kategori },
   data() {
     return {
+      slug : this.$route.params.slug,
+      detail_post : {},
+      count_data : [],
       title: "Dashboard",
       mainProps: { blank: false, blankColor: '#777', width: 100, height: 70, class: 'm1' }
     };
+  },
+  
+  mounted(){
+    this.detailData();
+  },
+  methods : {
+    detailData(){
+        this.axios.get("http://localhost:8000/api/post/" + this.slug).then(response => {
+        this.detail_post = response.data;
+      })
+    },
   }
 };
 </script>
@@ -27,14 +41,14 @@ export default {
     <div class="row mt-4">
       <div class="col-md-8">
         <div class="card p-0">
-          <div class="card-body p-0">
+          <div class="card-body p-0" v-for="data in detail_post" :key="data.id">
             <div class="my-3 d-flex flex-column">
                 <div class="d-flex flex-column pr-4">
-                    <h3 class="font-poppins mb-2 font-size-24">Robot Gantikan Acara Kelulusan Wisuda Di Jepang</h3>
+                    <h3 class="font-poppins mb-2 font-size-24">{{data.judul}}</h3>
                     <div class="d-flex">
                         <p class="text-muted pr-2 font-size-14">
                             <i class="far fa-clock"></i>
-                            April 10, 2020
+                            {{data.created_at}}
                         </p>
                         |
                         <a href="javascript:void(0);" class="d-flex text-primary px-2">
@@ -45,26 +59,10 @@ export default {
                     <b-img  src="https://picsum.photos/1024/480/?image=58" rounded alt="Rounded image"></b-img>
 
                     <p class="text-muted artikel-indent mb-4 mt-4 font-size-16 text-justify">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum at voluptate vel. Non porro, autem sequi vero obcaecati minima ut magnam repellendus voluptatibus, quaerat veritatis enim beatae similique mollitia.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum at voluptate vel. Non porro, autem sequi vero obcaecati minima ut magnam repellendus voluptatibus, quaerat veritatis enim beatae similique mollitia.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum at voluptate vel. Non porro, autem sequi vero obcaecati minima ut magnam repellendus voluptatibus, quaerat veritatis enim beatae similique mollitia.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum at voluptate vel. Non porro, autem sequi vero obcaecati minima ut magnam repellendus voluptatibus, quaerat veritatis enim beatae similique mollitia.
+                        {{data.content}}
                     </p>
-                    <p class="text-muted artikel-indent mb-4 mt-4 font-size-16 text-justify">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum at voluptate vel. Non porro, autem sequi vero obcaecati minima ut magnam repellendus voluptatibus, quaerat veritatis enim beatae similique mollitia.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum at voluptate vel. Non porro, autem sequi vero obcaecati minima ut magnam repellendus voluptatibus, quaerat veritatis enim beatae similique mollitia.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum at voluptate vel. Non porro, autem sequi vero obcaecati minima ut magnam repellendus voluptatibus, quaerat veritatis enim beatae similique mollitia.
-                    </p>
-                    <p class="text-muted artikel-indent mb-4 mt-4 font-size-16 text-justify">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum at voluptate vel. Non porro, autem sequi vero obcaecati minima ut magnam repellendus voluptatibus, quaerat veritatis enim beatae similique mollitia.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum at voluptate vel. Non porro, autem sequi vero obcaecati minima ut magnam repellendus voluptatibus, quaerat veritatis enim beatae similique mollitia.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum at voluptate vel. Non porro, autem sequi vero obcaecati minima ut magnam repellendus voluptatibus, quaerat veritatis enim beatae similique mollitia.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum at voluptate vel. Non porro, autem sequi vero obcaecati minima ut magnam repellendus voluptatibus, quaerat veritatis enim beatae similique mollitia.
-                    </p>
-                    <div class="d-flex">
-                        <a href="/detail" class="text-primary px-1 mx-1">#Candahar</a>
-                        <a href="/detail" class="text-primary px-1 mx-1">#Candahar</a>
-                        <a href="/detail" class="text-primary px-1 mx-1">#Candahar</a>
+                    <div class="d-flex" v-for="tag in data.tag" :key="tag.id">
+                        <a href="/detail" class="text-primary px-1 mx-1">{{tag.name}}</a>
                     </div>
                     <div class="d-flex">
                         <b-dropdown
@@ -127,9 +125,9 @@ export default {
                     </div>
                 </div>
             </div>
-            <h1 class="card-title mb-4">3 Komentar</h1>
+            <h1 class="card-title mb-4" >{{data.comment.length}} Komentar</h1>
             <hr style="height:1px;background-color:#f9f9f9;">
-            <div class="comment" v-for="c in 5" :key="c">
+            <div class="comment" v-for="comment in data.comment" :key="comment.id">
                 <div class="d-flex justify-content-start align-content-center align-items-center">
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <b-img src="https://picsum.photos/1024/480/?image=58" height="75px" width="75px"  rounded="circle" alt="Circle image"></b-img>
@@ -138,10 +136,10 @@ export default {
                         <p class="text-primary mb-0">Anonymous</p>
                         <p class="text-muted font-size-10 mt-0 mb-0">
                             <i class="far fa-clock"></i>
-                            April 10, 2020
+                            {{comment.created_at | formatDate}}
                         </p>
                         <p class="text-dark mt-1 artikel-indent">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta, ea. Repudiandae explicabo veniam nostrum nemo mollitia, accusamus laudantium odit quo minus labore natus sit adipisci error? Eveniet minus veritatis praesentium.
+                            {{comment.body}}
                         </p>
                     </div>
                 </div>

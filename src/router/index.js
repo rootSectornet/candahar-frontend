@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueMeta from 'vue-meta'
 
-import store from '@/state/store'
+// import store from '@/state/store'
 import routes from './routes'
 
 Vue.use(VueRouter)

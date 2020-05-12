@@ -13,6 +13,6 @@ export default [
   {
     path: '/tentang-kami',
     name: 'tentang-kami',
-    component: () => import('./views/detail'),
+    component: () => import('./views/about'),
   },
 ]

@@ -3,10 +3,19 @@
 export default {
   data() {
     return {
+      post :[],
       mainProps: { blank: false, blankColor: '#777', width: 300, height: 250, class: 'm1' }
     };
   },
+  created(){
+      this.loadData();
+  },
   methods: {
+      loadData(){
+        this.axios.get("http://localhost:8000/api/post").then(response => {
+        this.post = response.data;
+      })
+    }
   }
 };
 </script>
