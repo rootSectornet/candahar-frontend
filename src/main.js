@@ -8,6 +8,7 @@ import vco from "v-click-outside"
 import router from './router/index'
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import VueMeta from 'vue-meta';
 
 import "@/design/index.scss";
 import moment from 'moment';
@@ -21,6 +22,7 @@ Vue.use(vco)
 
 Vue.config.productionTip = false
 
+Vue.use(VueMeta);
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue)
 Vue.use(Vuelidate)

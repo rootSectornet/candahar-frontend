@@ -16,6 +16,10 @@ export default {
   components: { Layout,Slider,Artikel,Kategori },
   data() {
     return {
+      metaInfo: {
+        title: 'Candahar.com',
+        titleTemplate: 'Tempat Berbagi Informasi Seputar Teknologi'
+      },
       post: [],
       title: "Dashboard",
       mainProps: { blank: false, blankColor: '#777', width: 100, height: 70, class: 'm1' }
