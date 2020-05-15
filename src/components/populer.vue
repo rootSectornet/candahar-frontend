@@ -28,8 +28,8 @@ export default {
 <template>
     <div class="card">
         <div class="card-body">
-        <h1 class="card-title text-primary">Berita Menarik Lainnya</h1>
-        <p class="card-title-desc">Beberapa Menarik Lainnya.</p>
+        <h1 class="card-title text-primary">Berita Populer</h1>
+        <p class="card-title-desc">Beberapa terpopuler hari ini.</p>
         <div class="my-4">
             <div class="d-flex mb-2 justify-content-between"  v-for="(data,i) in post.data" :key="i">
             <div class="d-flex flex-column px-1">

@@ -8,6 +8,7 @@ export default [
   {
     path: '/detail/:slug',
     name: 'detail',
+    props: true,
     component: () => import('./views/detail'),
   },
   {

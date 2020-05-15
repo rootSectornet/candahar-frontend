@@ -13,6 +13,7 @@
     "bootstrap-vue": "^2.1.0",
     "core-js": "^3.4.4",
     "metismenujs": "^1.1.0",
+    "mobile-device-detect": "^0.3.3",
     "moment": "^2.25.3",
     "sass": "^1.24.2",
     "sass-loader": "^8.0.0",

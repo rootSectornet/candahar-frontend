@@ -1,6 +1,6 @@
 <script>
 import appConfig from "@/app.config";
-
+import { isMobile } from 'mobile-device-detect';
 export default {
   name: "app",
   page: {
@@ -9,6 +9,9 @@ export default {
       title = typeof title === "function" ? title(this.$store) : title;
       return title ? `${title} | ${appConfig.title}` : appConfig.title;
     }
+  },
+  mounted(){
+    if(isMobile){document.body.removeAttribute("data-layout-size", "boxed");}
   }
 };
 </script>

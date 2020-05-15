@@ -3,7 +3,7 @@
 export default {
   data() {
     return {
-      isMenuCondensed: false
+      isMenuCondensed: false,
     };
   },
   methods: {
@@ -15,10 +15,15 @@ export default {
 <div>
   <b-navbar toggleable="lg" type="dark" variant="white">
     <b-navbar-brand href="/">
-      <img src="https://instagram.fcgk1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/69560589_382664182420809_568466125948452864_n.jpg?_nc_ht=instagram.fcgk1-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=Ktdp0eNMMKgAX_Myk-G&oh=15e404df5ca5623dbd9adb93cc205810&oe=5EB96C7E" alt="Kitten">
+      <img src="@/assets/images/companies/logo.jpg" alt="Kitten">
     </b-navbar-brand>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+    <b-navbar-toggle target="nav-collapse">
+        <template v-slot:default="{ expanded }">
+          <i v-if="expanded" class="fas fa-times"></i>
+          <i v-else class="fa fa-fw fa-bars"></i>
+      </template>
+    </b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>

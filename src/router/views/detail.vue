@@ -3,7 +3,7 @@ import Layout from "../layouts/main";
 import Related from "@/components/related";
 import Kategori from "@/components/category";
 import appConfig from "@/app.config";
-
+import {Resource} from "@/resource/resource";
 /**
  * Dashboard Component
  */
@@ -22,14 +22,17 @@ export default {
       mainProps: { blank: false, blankColor: '#777', width: 100, height: 70, class: 'm1' }
     };
   },
-  
   mounted(){
-    this.detailData();
+    this.detailPost();
   },
   methods : {
-    detailData(){
-        this.axios.get("http://localhost:8000/api/post/" + this.slug).then(response => {
-        this.detail_post = response.data;
+    detailPost(){
+      Resource.detailPost(this.slug,(err,data)=>{
+        if(err){
+          console.log(err)
+        }else{
+          this.detail_post = data
+        }
       })
     },
   }
@@ -48,7 +51,7 @@ export default {
                     <div class="d-flex">
                         <p class="text-muted pr-2 font-size-14">
                             <i class="far fa-clock"></i>
-                            {{data.created_at}}
+                            {{data.created_date}}
                         </p>
                         |
                         <a href="javascript:void(0);" class="d-flex text-primary px-2">
@@ -61,8 +64,8 @@ export default {
                     <p class="text-muted artikel-indent mb-4 mt-4 font-size-16 text-justify">
                         {{data.content}}
                     </p>
-                    <div class="d-flex" v-for="tag in data.tag" :key="tag.id">
-                        <a href="/detail" class="text-primary px-1 mx-1">{{tag.name}}</a>
+                    <div class="d-flex">
+                        <a href="/detail"  v-for="tag in data.tag" :key="tag.id" class="text-primary px-1 mx-1">{{tag.name}}</a>
                     </div>
                     <div class="d-flex">
                         <b-dropdown
