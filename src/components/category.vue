@@ -33,7 +33,7 @@ export default {
                     <b-list-group v-for="(item,i) in category.data" :key="i">
                         <b-list-group-item href="#" class="d-flex justify-content-between align-items-center">
                             {{item.name}}
-                            <b-badge variant="primary" pill>14</b-badge>
+                            <b-badge variant="primary" pill>{{item.count}}</b-badge>
                         </b-list-group-item>
                     </b-list-group>
             </div>
